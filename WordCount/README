@@ -1,0 +1,34 @@
+Mars Project
+$Id: README 721 2009-11-10 10:23:55Z wenbinor $
+
+1, Application Overview
+-----------------------
+Word Count (WC): It counts the number of occurrences for each word in a file. Each Map task processes a portion of the input file and emits intermediate data pairs, each of which consists of a word as the key and a value of 1 for the occurrence. Group is required, and no reduce is needed, because the Mars runtime provides the size of each group, after the Group stage.  
+
+2, Provided Files
+-----------------
+MarsUtils.cu: some useful functions
+MarsStrLib.cu: an efficient string library on GPU
+MarsLib.cu: the GPU MapReduce engine
+MarsSort.cu: a GPU version bitonic sort
+MarsScan.cu: a GPU version scan
+MarsInc.h: included by user defined files
+
+mars框架使用前，把整个文件夹放到Nivdia_Gpu_computing文件夹下
+只需要根据的算法逻辑去修改一下这几个文件。
+global.h: global include file//定义头文件，包括算法中用到的数据结构
+main.cu: main function's file//主函数
+map.cu: user defined map//在此文件中实现map接口
+reduce.cu: user defined reduce//实现reduce接口
+compare.cu: user defined compare//自定义数据类型的compare函数的实现
+
+3. Running the Application
+--------------------------
+
+
+Run "make " to build the release version of this application running on the GPU.
+Run "make dbg=1" to build the debug version of this application running on the CPU.
+
+./WordCount <dataFile> 
+
+Note: the test textual file should be in unix format ('\n').
